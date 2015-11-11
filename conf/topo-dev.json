@@ -17,8 +17,8 @@
     "mysql": {
       "ip": "yilosdev.mysql.rds.aliyuncs.com",
       "port": 3306,
-      "user": "xxx",
-      "password": "xxx",
+      "user": "yilos_dev",
+      "password": "yilos_dev",
       "dbName": "nailstar"
     },
     "mongodb": {

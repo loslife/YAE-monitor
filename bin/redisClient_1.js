@@ -1,4 +1,5 @@
 var redis = require("redis");
+var logger = require(FRAMEWORKPATH + "/utils/logger").getLogger();
 
 exports.getClient = getClient;
 exports.quitClient = quitClient;
@@ -16,8 +17,9 @@ var selected = false;
 function getClient(callback){
     if(selected){
         process.nextTick(function(){
-            callback(client)
+            callback(client);
         });
+        return;
     }
     client.select(1, function(){
         selected = true;
