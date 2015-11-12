@@ -5,11 +5,13 @@ var info = require("./info.json");
 exports.start = start;
 
 var TIME_INTERVAL_ACTIVITY = 1000 * 60 * 60 * 1;
+var TIME_INTERVAL_RANKING = 1000 * 60 * 60 * 1;
 
 //启动监控任务
 function start(){
     console.log("qjc monitor working ~");
     setInterval(monitorActivity, TIME_INTERVAL_ACTIVITY);
+    setInterval(monitorRanking, TIME_INTERVAL_RANKING);
 }
 
 //当期活动详情接口监控
@@ -90,4 +92,30 @@ function monitorActivity(){
             services.sendMsg(param);
         }
     });
+}
+
+//排行榜
+function monitorRanking(){
+
+    var api = "/qjc/ranking";
+    var url = info.host + api;
+    var option = {
+        method: "GET",
+        uri: url,
+        json:true
+    };
+    request(option, function(error, response, body){
+        if(error){
+            return logger.error(error);
+        }
+        console.log(body);
+        //接口正常
+        if(body && body.result && body.result.candidates){
+            return ;
+        }
+        //接口异常，发送短信
+        param = "接口" + api + "," + "数据为空";
+        services.sendMsg(param);
+    });
+
 }
