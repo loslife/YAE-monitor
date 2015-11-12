@@ -13,15 +13,12 @@
 
         }
     },
+    "initial": {
+        "name": "start",
+        "impl": "monitor.start",
+        "comment": "接口监控开启"
+    },
     "services": [
-        {
-            "name": "xxx",
-            "path": "/nailstar/account/myInfo/:accountId",
-            "method": "get",
-            "auth": false,
-            "impl": "accountService.queryFourNumbers",
-            "comment": "xxx"
-        }
     ],
     "statics": [
     ],
