@@ -1,0 +1,33 @@
+{
+    "interface": {
+        "services": {
+
+        },
+        "sdk": {
+
+        },
+        "url": {
+
+        },
+        "fragment": {
+
+        }
+    },
+    "services": [
+
+    ],
+    "statics": [
+        {
+            "name": "framework",
+            "path": "/framework",
+            "comment": "乐斯前台框架"
+        }
+    ],
+    "dataModelSchema": [
+    ],
+    "configuration": {
+
+    },
+    "errorHandler": [
+    ]
+}
