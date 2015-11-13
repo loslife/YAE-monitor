@@ -19,8 +19,28 @@
         "comment": "接口监控开启"
     },
     "services": [
+        {
+            "name": "monitor_login",
+            "path": "/user/login",
+            "method": "post",
+            "auth": false,
+            "impl": "auth.login",
+            "comment": "用户登录"
+        },{
+            "name": "monitor_logout",
+            "path": "/user/logout",
+            "method": "get",
+            "auth": false,
+            "impl": "auth.logout",
+            "comment": "用户退出"
+        }
     ],
     "statics": [
+        {
+            "name": "monitor",
+            "path": "/monitor",
+            "comment": "美甲大咖接口监控"
+        }
     ],
     "dataModelSchema": [
     ],

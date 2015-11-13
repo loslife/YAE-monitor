@@ -1,6 +1,6 @@
 {
   "env": "dev",
-  "service_doc":"vapi",
+  "service_doc":"monitor",
   "cluster": [
     {
       "name": "baseService",
@@ -9,6 +9,7 @@
       "protocol": "http",
       "workerno": 1,
       "applications": [
+        "framework",
         "monitor"
       ]
     }
