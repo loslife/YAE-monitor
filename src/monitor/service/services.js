@@ -49,7 +49,6 @@ function sendMsgByNumber(to, param, callback){
     };
 
     request(options, function(err, response){
-        console.log(response);
         if(err){
             return callback(err);
         }

@@ -1,6 +1,7 @@
 var request = require('request');
 var services = require("./services");
 var info = require("./info.json");
+var monitor = require("./monitor");
 
 exports.start = start;
 
@@ -11,6 +12,9 @@ var TIME_INTERVAL_HOTESTTOPIC = 1000 * 60 * 60 * 1;
 //启动监控任务
 function start(){
     console.log("topics monitor working ~");
+    monitorPosters();
+    monitorCategories();
+    monitorHotestTopic();
     setInterval(monitorPosters, TIME_INTERVAL_POSTERS);
     setInterval(monitorCategories, TIME_INTERVAL_CATEGORIES);
     setInterval(monitorHotestTopic, TIME_INTERVAL_HOTESTTOPIC);
@@ -31,12 +35,16 @@ function monitorPosters(){
             return logger.error(error);
         }
         //接口正常
+        var param = "接口" + api + ",";
+        var result = "正常";
         if(body && body.result && body.result.posters && body.result.posters.length > 0){
+            monitor.setResult(api, result);
             return ;
         }
         //接口异常，发送短信
-        param = "接口" + api + "," + "数据为空";
-        services.sendMsg(param);
+        result = "数据为空";
+        monitor.setResult(api, result);
+        services.sendMsg(param + result);
     });
 }
 
@@ -55,12 +63,16 @@ function monitorCategories(){
             return console.log(error);
         }
         //接口正常
+        var param = "接口" + api + ",";
+        var result = "正常";
         if(body && body.result && body.result.categories && body.result.categories.length > 0){
+            monitor.setResult(api, result);
             return ;
         }
         //接口异常，发送短信
-        param = "接口" + api + "," + "数据为空";
-        services.sendMsg(param);
+        result = "数据为空";
+        monitor.setResult(api, result);
+        services.sendMsg(param + result);
     });
 }
 
@@ -79,11 +91,15 @@ function monitorHotestTopic(){
             return logger.error(error);
         }
         //接口正常
+        var param = "接口" + api + ",";
+        var result = "正常";
         if(body && body.result && body.result.topics && body.result.topics.length > 0){
+            monitor.setResult(api, result);
             return ;
         }
         //接口异常，发送短信
-        param = "接口" + api + "," + "数据为空";
+        result = "数据为空";
+        monitor.setResult(api, result);
         services.sendMsg(param);
     });
 }

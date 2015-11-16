@@ -56,13 +56,13 @@ var app = angular.module('app', [
                     })
 
                     //用户详情统计
-                    .state('app.monitor', {
-                        url: '/monitor',
-                        templateUrl: '/monitor/html/monitor.html',
+                    .state('app.apiDetails', {
+                        url: '/apiDetails',
+                        templateUrl: '/monitor/html/apiDetails.html',
                         resolve: {
                             deps: ['uiLoad',
                                 function (uiLoad) {
-                                    return uiLoad.load(['/monitor/js/monitor.js']);
+                                    return uiLoad.load(['/monitor/js/apiDetails.js']);
                                 }]
                         }
                     })

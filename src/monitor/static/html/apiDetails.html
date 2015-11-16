@@ -1,0 +1,42 @@
+<div class="hbox hbox-auto-xs bg-light " ng-init="
+  app.settings.asideFixed = true;
+  app.settings.asideDock = false;
+  app.settings.container = false;
+  app.hideAside = false;
+  app.hideFooter = true;" ng-controller="apiDetails">
+
+
+    <div class="col" style="width: 100%;">
+
+        <div class="row-row">
+            <div class="cell">
+                <div class="cell-inner">
+                    <div class="wrapper-md pb-0">
+
+                        <div class="panel panel-default">
+
+                            <div class="table-responsive ngGrid">
+                                <table class="table table-striped m-b-none">
+                                    <thead>
+                                    <tr>
+                                        <th>接口</th>
+                                        <th>详情</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="(key, value) in infos">
+                                        <td>{{key}}</td>
+                                        <td>{{value}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

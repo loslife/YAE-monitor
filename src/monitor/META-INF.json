@@ -33,6 +33,13 @@
             "auth": false,
             "impl": "auth.logout",
             "comment": "用户退出"
+        },{
+            "name": "apiDetails",
+            "path": "/api/apiDetails",
+            "method": "get",
+            "auth": false,
+            "impl": "api.apiDetails",
+            "comment": "接口统计"
         }
     ],
     "statics": [

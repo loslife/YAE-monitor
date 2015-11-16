@@ -19,7 +19,7 @@ app.controller('LoginCtrl', ['$rootScope', '$scope', '$http', '$state', function
             if (data.code == 0) {
                 //将权限放到rootScope
                 $rootScope.userName = data.result.user || "";
-                $state.go('app.users');
+                $state.go('app.apiDetails');
             } else {
                 $scope.authError = 'Email or Password not right';
             }
