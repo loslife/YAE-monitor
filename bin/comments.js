@@ -44,7 +44,9 @@ function setComments(){
                             return nextOne(err);
                         }
 
-                        async.eachSeries(results, function(item, next){
+                        async.each(results, function(item, next){
+
+                            var account_result = [];
                             var at = {};
                             var replys = [];
                             var replysAt = [];
@@ -67,7 +69,6 @@ function setComments(){
                                     item.authorPhoto = account_result[0]["photo_url"];
                                     item.userid = account_result[0]["id"];
 
-                                    //delete item["account_id"];
                                     delete item["at_account_id"];
 
                                     client.zadd(topic.id, parseInt(item.createDate), item.id, function(error){
@@ -123,19 +124,23 @@ function setComments(){
                                 //根据_queryReplys的结果查询回复中@的账号信息
                                 function _queryReplysAt(callback){
 
-                                    var replysAtSql = "select t.id 'userId',t.nickname 'nickname' from accounts t where t.id = :id";
 
                                     async.eachSeries(replys, function(item, cb){
                                         var id = item["at_account_id"];
-                                        dbHelper.execSql(replysAtSql, {id: id}, function(err, result){
+
+                                        getAccountByid(id, function(err, result){
                                             if(err){
                                                 return cb(err);
                                             }
-                                            item.at = result[0];
+                                            item.at = {
+                                                userId: result[0].id,
+                                                nickname: result[0].nickname
+                                            };
                                             delete item["at_account_id"];
                                             replysAt.push(item);
                                             cb(null);
                                         });
+
                                     }, function(err){
                                         if(err){
                                             return callback(err);
