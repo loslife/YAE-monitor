@@ -21,7 +21,8 @@ function monitorOfficalAndRecommend(){
     var option = {
         method: "GET",
         uri: url,
-        json:true
+        json:true,
+        time: true
     };
     request(option, function(error, response, body){
         if(error){
@@ -45,10 +46,16 @@ function monitorOfficalAndRecommend(){
         }
         //接口异常，发送短信
         if(flag){
-            monitor.setResult(api, result);
+            monitor.setResult(api, {
+                result: result,
+                elapsedTime: response.elapsedTime
+            });
             services.sendMsg(param + result);
         }else{
-            monitor.setResult(api, "正常");
+            monitor.setResult(api, {
+                result: "正常",
+                elapsedTime: response.elapsedTime
+            });
         }
     });
 

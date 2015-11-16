@@ -21,12 +21,14 @@
                                     <tr>
                                         <th>接口</th>
                                         <th>详情</th>
+                                        <th>响应时间(ms)</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="(key, value) in infos">
                                         <td>{{key}}</td>
-                                        <td>{{value}}</td>
+                                        <td>{{value.result}}</td>
+                                        <td>{{value.elapsedTime}}</td>
                                     </tr>
                                     </tbody>
                                 </table>

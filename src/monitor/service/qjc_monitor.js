@@ -28,7 +28,8 @@ function monitorActivity(){
     var option = {
         method: "GET",
         uri: url,
-        json:true
+        json:true,
+        time: true
     };
     request(option, function(error, response, body){
         if(error){
@@ -92,10 +93,16 @@ function monitorActivity(){
         }
         //接口异常，发送短信
         if(flag){
-            monitor.setResult(api, api_result);
+            monitor.setResult(api, {
+                result: api_result,
+                elapsedTime: response.elapsedTime
+            });
             services.sendMsg(param + api_result);
         }else{
-            monitor.setResult(api, "正常");
+            monitor.setResult(api, {
+                result: "正常",
+                elapsedTime: response.elapsedTime
+            });
         }
     });
 }
@@ -108,7 +115,8 @@ function monitorRanking(){
     var option = {
         method: "GET",
         uri: url,
-        json:true
+        json:true,
+        time: true
     };
     request(option, function(error, response, body){
         if(error){
@@ -118,12 +126,18 @@ function monitorRanking(){
         var param = "接口" + api + ",";
         var result = "正常";
         if(body && body.result && body.result.candidates){
-            monitor.setResult(api, result);
+            monitor.setResult(api, {
+                result: result,
+                elapsedTime: response.elapsedTime
+            });
             return ;
         }
         //接口异常，发送短信
         result = "数据为空";
-        monitor.setResult(api, result);
+        monitor.setResult(api, {
+            result: result,
+            elapsedTime: response.elapsedTime
+        });
         services.sendMsg(param + result);
     });
 
@@ -136,7 +150,8 @@ function monitorRandom(){
     var option = {
         method: "GET",
         uri: url,
-        json:true
+        json:true,
+        time: true
     };
     request(option, function(error, response, body){
         if(error){
@@ -146,12 +161,18 @@ function monitorRandom(){
         var param = "接口" + api + ",";
         var result = "正常";
         if(body && body.result && body.result.candidates){
-            monitor.setResult(api, result);
+            monitor.setResult(api, {
+                result: result,
+                elapsedTime: response.elapsedTime
+            });
             return ;
         }
         //接口异常，发送短信
         result = "数据为空";
-        monitor.setResult(api, result);
+        monitor.setResult(api, {
+            result: result,
+            elapsedTime: response.elapsedTime
+        });
         services.sendMsg(param + result);
     });
 }

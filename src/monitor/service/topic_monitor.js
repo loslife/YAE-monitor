@@ -28,7 +28,8 @@ function monitorPosters(){
     var option = {
         method: "GET",
         uri: url,
-        json:true
+        json:true,
+        time: true
     };
     request(option, function(error, response, body){
         if(error){
@@ -38,12 +39,18 @@ function monitorPosters(){
         var param = "接口" + api + ",";
         var result = "正常";
         if(body && body.result && body.result.posters && body.result.posters.length > 0){
-            monitor.setResult(api, result);
+            monitor.setResult(api, {
+                result: result,
+                elapsedTime: response.elapsedTime
+            });
             return ;
         }
         //接口异常，发送短信
         result = "数据为空";
-        monitor.setResult(api, result);
+        monitor.setResult(api, {
+            result: result,
+            elapsedTime: response.elapsedTime
+        });
         services.sendMsg(param + result);
     });
 }
@@ -56,7 +63,8 @@ function monitorCategories(){
     var option = {
         method: "GET",
         uri: url,
-        json:true
+        json:true,
+        time: true
     };
     request(option, function(error, response, body){
         if(error){
@@ -66,12 +74,18 @@ function monitorCategories(){
         var param = "接口" + api + ",";
         var result = "正常";
         if(body && body.result && body.result.categories && body.result.categories.length > 0){
-            monitor.setResult(api, result);
+            monitor.setResult(api, {
+                result: result,
+                elapsedTime: response.elapsedTime
+            });
             return ;
         }
         //接口异常，发送短信
         result = "数据为空";
-        monitor.setResult(api, result);
+        monitor.setResult(api, {
+            result: result,
+            elapsedTime: response.elapsedTime
+        });
         services.sendMsg(param + result);
     });
 }
@@ -84,7 +98,8 @@ function monitorHotestTopic(){
     var option = {
         method: "GET",
         uri: url,
-        json:true
+        json:true,
+        time: true
     };
     request(option, function(error, response, body){
         if(error){
@@ -94,12 +109,18 @@ function monitorHotestTopic(){
         var param = "接口" + api + ",";
         var result = "正常";
         if(body && body.result && body.result.topics && body.result.topics.length > 0){
-            monitor.setResult(api, result);
+            monitor.setResult(api, {
+                result: result,
+                elapsedTime: response.elapsedTime
+            });
             return ;
         }
         //接口异常，发送短信
         result = "数据为空";
-        monitor.setResult(api, result);
+        monitor.setResult(api, {
+            result: result,
+            elapsedTime: response.elapsedTime
+        });
         services.sendMsg(param);
     });
 }
