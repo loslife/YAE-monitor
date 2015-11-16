@@ -9,10 +9,13 @@ exports.exec = function(params){
 
 //刷新账户
 function setAccounts(){
+
+    logger.info("accounts初始化开始~");
     var sql = "select * from accounts";
     dbHelper.execSql(sql, {}, function(err, results){
         if(err){
-            return logger.error(err);
+            logger.error(err);
+            return process.exit(0);
         }
         async.each(results, function(item, callback){
             redis1.getClient(function(client){
@@ -25,9 +28,11 @@ function setAccounts(){
             });
         }, function(err){
             if(err){
-                return logger.error(err);
+                logger.error(err);
+                return process.exit(0);
             }
             logger.info("accounts初始化成功~");
+            process.exit(0);
         });
     });
 }

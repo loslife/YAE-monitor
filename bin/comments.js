@@ -11,6 +11,7 @@ exports.exec = function(params){
 //评论
 function setComments(){
 
+    logger.info("comments初始化开始~");
     var sql = "select a.id 'id',a.account_id 'account_id',a.create_date 'createDate'," +
         "a.content 'content',a.content_pic 'contentPic',a.isHomework 'isHomework',a.at_account_id 'at_account_id'," +
         "a.status 'status',a.score 'score' " +
@@ -24,12 +25,13 @@ function setComments(){
         client.flushdb(function(err){
             if(err){
                 logger.error(err);
-                return;
+                return process.exit(0);
             }
 
             dbHelper.execSql(topicSql, {}, function(err, topicIds){
                 if(err){
-                    return logger.error(err);
+                    logger.error(err);
+                    return process.exit(0);
                 }
 
                 async.each(topicIds, function(topic, nextOne){
@@ -154,9 +156,11 @@ function setComments(){
                     });
                 }, function(err){
                     if(err){
-                        return logger.error(err);
+                        logger.error(err);
+                        return process.exit(0);
                     }
                     logger.info("comments初始化成功~");
+                    process.exit(0);
                 });
             });
         });
