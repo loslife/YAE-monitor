@@ -46,7 +46,6 @@ function setComments(){
 
                         async.each(results, function(item, next){
 
-                            var account_result = [];
                             var at = {};
                             var replys = [];
                             var replysAt = [];
@@ -120,7 +119,6 @@ function setComments(){
                                         callback(null);
                                     });
                                 }
-
                                 //根据_queryReplys的结果查询回复中@的账号信息
                                 function _queryReplysAt(callback){
 
