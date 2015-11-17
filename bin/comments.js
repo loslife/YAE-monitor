@@ -89,15 +89,18 @@ function setComments(){
                                 //根据comment查询@的账号信息
                                 function _queryAt(callback){
 
-                                    var atSql = "select t.id 'userId',t.nickname 'nickname' from accounts t where t.id = :id";
-
-                                    dbHelper.execSql(atSql, {id: item["at_account_id"]}, function(err, results){
-
+                                    getAccountByid(item["at_account_id"], function(err, result){
                                         if(err){
                                             return callback(err);
                                         }
-
-                                        at = results[0] || {};
+                                        if(result && result[0]){
+                                            at = {
+                                                userId: result[0].id,
+                                                nickname: result[0].nickname
+                                            };
+                                        }else{
+                                            at = {};
+                                        }
                                         callback(null);
                                     });
                                 }
@@ -130,10 +133,14 @@ function setComments(){
                                             if(err){
                                                 return cb(err);
                                             }
-                                            item.at = {
-                                                userId: result[0].id,
-                                                nickname: result[0].nickname
-                                            };
+                                            if(result && result[0]){
+                                                item.at = {
+                                                    userId: result[0].id,
+                                                    nickname: result[0].nickname
+                                                };
+                                            }else{
+                                                item.at = {};
+                                            }
                                             delete item["at_account_id"];
                                             replysAt.push(item);
                                             cb(null);
