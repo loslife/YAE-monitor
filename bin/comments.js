@@ -16,7 +16,7 @@ function setComments(){
         "a.content 'content',a.content_pic 'contentPic',a.isHomework 'isHomework',a.at_account_id 'at_account_id'," +
         "a.status 'status',a.score 'score' " +
         "from comments a " +
-        "where a.reply_to is Null and a.topic_id=:id and a.ready=1 order by a.create_date desc";
+        "where （a.reply_to is Null or a.reply_to=''） and a.topic_id=:id and a.ready=1 order by a.create_date desc";
 
     var topicSql = "select id from topics";
 
