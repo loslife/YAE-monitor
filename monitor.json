@@ -1,0 +1,12 @@
+{
+  "apps" : [{
+              "name"        : "monitor",
+              "script"      : "webserver.js",
+              "args"        : ["-m","production","-n","baseService","-d","/usr/local/YAE-video-monitor/"],
+              "watch"       : false,
+              "node_args"   : "",
+              "error_file"  : "monitor.err.log",
+              "out_file"    : "monitor.out.log",
+              "cwd"         : "/usr/local/YAE-SERVER/lib/"
+            }]
+}

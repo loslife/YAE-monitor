@@ -1,6 +1,6 @@
 {
   "env": "dev",
-  "service_doc":"vapi",
+  "service_doc":"monitor",
   "cluster": [
     {
       "name": "baseService",
@@ -9,7 +9,8 @@
       "protocol": "http",
       "workerno": 1,
       "applications": [
-
+        "framework",
+        "monitor"
       ]
     }
   ],
@@ -17,16 +18,9 @@
     "mysql": {
       "ip": "yilosdev.mysql.rds.aliyuncs.com",
       "port": 3306,
-      "user": "xxx",
-      "password": "xxx",
+      "user": "yilos_dev",
+      "password": "yilos_dev",
       "dbName": "nailstar"
-    },
-    "mongodb": {
-      "ip": "127.0.0.1",
-      "port": "27017",
-      "connectionurl": "127.0.0.1:27017",
-      "user": "",
-      "password": ""
     }
   }
 }
